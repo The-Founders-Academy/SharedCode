@@ -17,7 +17,8 @@ public class Mecanum2025 extends BaseMecanumDrive {
     public Mecanum2025(HardwareMap hardwareMap, MecanumConfigs mecanumConfigs, Pose2d initialPose, Alliance alliance) {
         super(hardwareMap, mecanumConfigs, initialPose, alliance);
 
-
+        m_frontLeft.setInverted(true);
+        m_backLeft.setInverted(true);
 
 
     }
