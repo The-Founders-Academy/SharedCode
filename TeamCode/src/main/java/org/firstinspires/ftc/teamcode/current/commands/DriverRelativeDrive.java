@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.current.commands;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.arcrobotics.ftclib.command.CommandBase;
 
 import org.firstinspires.ftc.teamcode.current.subsytems.Mecanum2025;
@@ -18,5 +20,13 @@ public class DriverRelativeDrive extends CommandBase {
     @Override
     public void execute() {
         m_mecanum.moveFieldRelative(m_driver.getLeftY(), -m_driver.getLeftX(), -m_driver.getRightX());     // rotation inverted because clockwise rotation is negative
+
+        TelemetryPacket P = new TelemetryPacket();
+        P.put("Left X", m_driver.getLeftX());
+        P.put("Left Y", m_driver.getLeftY());
+        P.put("Right X", m_driver.getRightX());
+
+        FtcDashboard.getInstance().sendTelemetryPacket(P);
+
     }
 }
