@@ -32,6 +32,8 @@ public class Mecanum2025 extends BaseMecanumDrive {
     private Pose2d m_robotPose;
     private IMU m_gyro;
 
+    private HolonomicOdometry m_odo;
+
 
     public Mecanum2025(HardwareMap hardwareMap, MecanumConfigs mecanumConfigs, Pose2d initialPose, Alliance alliance) {
         super(hardwareMap, mecanumConfigs, initialPose, alliance);
@@ -49,7 +51,7 @@ public class Mecanum2025 extends BaseMecanumDrive {
         right.setDirection(Motor.Direction.REVERSE);
         Encoder horizontal = m_backLeft.encoder.setDistancePerPulse(cm_per_tick);
 
-        HolonomicOdometry m_odo = new HolonomicOdometry(
+        m_odo = new HolonomicOdometry(
                 left::getDistance,
                 right::getDistance,
                 horizontal::getDistance,
@@ -75,7 +77,7 @@ public class Mecanum2025 extends BaseMecanumDrive {
 
     @Override
     public Rotation2d getHeading() {
-        return Rotation2d.fromDegrees(0);
+        return m_robotPose.getRotation().minus(new Rotation2d(Math.PI / 2));
     }
 
     @Override
@@ -86,6 +88,14 @@ public class Mecanum2025 extends BaseMecanumDrive {
     @Override
     public void resetPose(Pose2d pose) {
 
+    }
+
+    @Override
+    public void periodic() {
+        m_odo.updatePose();
+
+        double currentAngleRad = m_initialAngleRad - m_odo.getPose().getHeading(); // Initial + Heading
+        m_robotPose = new Pose2d(m_odo.getPose().getX(), -m_odo.getPose().getY(), new Rotation2d(currentAngleRad));
     }
 
 }
