@@ -26,7 +26,7 @@ public class Mecanum2025 extends BaseMecanumDrive {
     private double deadWheelRadiusCentimeters = 2.4;
 
     private double ticksPerRevolution = 2000.0;
-    private double trackWidthCentimeters = 36;
+    private double trackWidthCentimeters = 36.3;
     double perpendicularOffsetCentimeters = -20.32;
     private double m_initialAngleRad;
     private Pose2d m_robotPose;

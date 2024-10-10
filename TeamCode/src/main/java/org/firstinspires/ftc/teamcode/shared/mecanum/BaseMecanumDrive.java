@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.shared.mecanum;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.controller.PIDController;
 import com.arcrobotics.ftclib.geometry.Pose2d;
@@ -81,6 +83,14 @@ public abstract class BaseMecanumDrive extends SubsystemBase {
             speeds = ChassisSpeeds.fromFieldRelativeSpeeds(vXMps, vYMps, omegaRps, getHeading().minus(Rotation2d.fromDegrees(180)));
         } else {
             speeds = ChassisSpeeds.fromFieldRelativeSpeeds(vXMps, vYMps, omegaRps, getHeading());
+
+            TelemetryPacket heading = new TelemetryPacket();
+            heading.put("heading", getHeading());
+
+            FtcDashboard dashboard = FtcDashboard.getInstance();
+
+            dashboard.sendTelemetryPacket(heading);
+
         }
         move(speeds);
     }
