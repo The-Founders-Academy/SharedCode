@@ -11,17 +11,19 @@ public class ArmMotorTest extends OpMode {
     @Override
     public void init() {
         ArmMotor = new MotorEx(hardwareMap, "arm");
+        ArmMotor.set(0);
     }
 
     @Override
     public void loop() {
-        while(gamepad1.dpad_up){
+        if (gamepad1.dpad_up){
             ArmMotor.set(0.5);
         }
-        while(gamepad1.dpad_down){
+        else if (gamepad1.dpad_down){
             ArmMotor.set(-0.5);
         }
-
-        ArmMotor.stopMotor();
+        else {
+            ArmMotor.set(0);
+        }
     }
 }
