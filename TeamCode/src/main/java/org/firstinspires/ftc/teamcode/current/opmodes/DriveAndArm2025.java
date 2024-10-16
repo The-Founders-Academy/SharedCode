@@ -18,7 +18,9 @@ import org.firstinspires.ftc.teamcode.shared.mecanum.MecanumConfigs;
 import org.firstinspires.ftc.teamcode.shared.util.CommandGamepad;
 
 @TeleOp()
-public class DriveAndArm2025 extends CommandOpMode {
+public class
+
+DriveAndArm2025 extends CommandOpMode {
     private Mecanum2025 m_mecanumDrive;
     private CommandGamepad m_driver;
     private Arm2025 armSubsystem;
@@ -31,9 +33,9 @@ public class DriveAndArm2025 extends CommandOpMode {
         m_mecanumDrive.setDefaultCommand(new DriverRelativeDrive(m_mecanumDrive, m_driver));
 
         // Arm stuff
-        DcMotor armMotor = hardwareMap.get(DcMotor.class, "left_arm");
-        CRServo intake = hardwareMap.get(CRServo.class, "intake");
+        DcMotor armMotor = hardwareMap.get(DcMotor.class, "arm");
+//        CRServo intake = hardwareMap.get(CRServo.class, "intake");
         Servo wrist = hardwareMap.get(Servo.class, "wrist");
-        armSubsystem = new Arm2025(armMotor, intake, wrist);
+        armSubsystem = new Arm2025(armMotor, wrist);
     }
 }

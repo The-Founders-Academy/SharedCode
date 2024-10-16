@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Arm2025 {
 
     public DcMotor armMotor = null; //the arm motor
-    public CRServo intake = null; //the active intake servo
+//    public CRServo intake = null; //the active intake servo
     public Servo wrist = null; //the wrist servo
 
     final double ARM_TICKS_PER_DEGREE =
@@ -43,9 +43,8 @@ public class Arm2025 {
     public double armPosition = ARM_COLLAPSED_INTO_ROBOT;
 
 
-    public Arm2025(DcMotor armMotor, CRServo intake, Servo wrist) {
+    public Arm2025(DcMotor armMotor, Servo wrist) {
         this.armMotor = armMotor;
-        this.intake = intake;
         this.wrist = wrist;
 
         armMotor.setTargetPosition(0);
@@ -63,9 +62,9 @@ public class Arm2025 {
         wrist.setPosition(position);
     }
 
-    public void setIntakePower(double power) {
-        intake.set(power);
-    }
+//    public void setIntakePower(double power) {
+//        intake.set(power);
+//    }
 
     public void adjustArmPositionWithTriggers(double triggerAdjustment) {
         double adjustedPosition = armPosition + (FUDGE_FACTOR * triggerAdjustment);

@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.current.testing;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-//import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -10,9 +9,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
 @TeleOp
-public class ArmMotorTest extends LinearOpMode {
+public class ArmMotorTestNoCRV extends LinearOpMode {
     public DcMotor armMotor = null; //the arm motor
-//    public CRServo intake = null; //the active intake servo
     public Servo wrist = null; //the wrist servo
 
     final double ARM_TICKS_PER_DEGREE =
@@ -37,7 +35,7 @@ public class ArmMotorTest extends LinearOpMode {
 
 
     /* Variables to store the positions that the wrist should be set to when folding in, or folding out. */
-    final double WRIST_FOLDED_IN   = 0.8333;
+    final double WRIST_FOLDED_IN   = 0.1667;
     final double WRIST_FOLDED_OUT  = 0.5;
 
     /* A number in degrees that the triggers can adjust the arm position by */
@@ -51,8 +49,7 @@ public class ArmMotorTest extends LinearOpMode {
     @Override
     public void runOpMode() {
         armMotor   = hardwareMap.get(DcMotor.class, "arm"); //the arm motor
-//        intake = hardwareMap.get(CRServo.class, "intake");      // intake servo, continuous
-        wrist  = hardwareMap.get(Servo.class, "wrist");         // wrist servo, not continuous
+        wrist  = hardwareMap.get(Servo.class, "wrist");         // wrist servo, not continuous 0 goes to wrist
 
         /*This sets the maximum current that the control hub will apply to the arm before throwing a flag */
         ((DcMotorEx) armMotor).setCurrentAlert(5, CurrentUnit.AMPS);
@@ -66,7 +63,7 @@ public class ArmMotorTest extends LinearOpMode {
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         /* Make sure that the intake is off, and the wrist is folded in. */
-//        intake.setPower(INTAKE_OFF);                        // sets a power between -1 to 1 just like a real motor
+                               // sets a power between -1 to 1 just like a real motor
         wrist.setPosition(WRIST_FOLDED_IN);                 // sets the WRIST_FOLDED_IN position of the non-continuous servo (which is zero)
 
         /* Wait for the game driver to press play */
@@ -75,15 +72,6 @@ public class ArmMotorTest extends LinearOpMode {
         /* Run until the driver presses stop */
         while (opModeIsActive()) {
 
-//            if (gamepad1.a) {
-//                intake.setPower(INTAKE_COLLECT);
-//            }
-//            else if (gamepad1.x) {
-//                intake.setPower(INTAKE_OFF);
-//            }
-//            else if (gamepad1.b) {
-//                intake.setPower(INTAKE_DEPOSIT);
-//            }
 
 
 
@@ -98,7 +86,6 @@ public class ArmMotorTest extends LinearOpMode {
                 /* This is the intaking/collecting arm position */
                 armPosition = ARM_COLLECT;
                 wrist.setPosition(WRIST_FOLDED_OUT);
-//                intake.setPower(INTAKE_COLLECT);
             }
 
             else if (gamepad1.left_bumper){
@@ -118,7 +105,6 @@ public class ArmMotorTest extends LinearOpMode {
                     /* This turns off the intake, folds in the wrist, and moves the arm
                     back to folded inside the robot. This is also the starting configuration */
                 armPosition = ARM_COLLAPSED_INTO_ROBOT;
-//                intake.setPower(INTAKE_OFF);
                 wrist.setPosition(WRIST_FOLDED_IN);
             }
 
@@ -131,14 +117,12 @@ public class ArmMotorTest extends LinearOpMode {
             else if (gamepad1.dpad_up){
                 /* This sets the arm to vertical to hook onto the LOW RUNG for hanging */
                 armPosition = ARM_ATTACH_HANGING_HOOK;
-//                intake.setPower(INTAKE_OFF);
                 wrist.setPosition(WRIST_FOLDED_IN);
             }
 
             else if (gamepad1.dpad_down){
                 /* this moves the arm down to lift the robot up once it has been hooked */
                 armPosition = ARM_WINCH_ROBOT;
-//                intake.setPower(INTAKE_OFF);
                 wrist.setPosition(WRIST_FOLDED_IN);
             }
 
