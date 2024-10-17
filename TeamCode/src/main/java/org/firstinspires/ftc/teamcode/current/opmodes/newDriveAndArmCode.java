@@ -126,10 +126,10 @@ public class newDriveAndArmCode extends LinearOpMode {
 
 
             // same system as Robot Relative drive except rotY and rotX take into account field relative motions.
-            double frontLeftPower = (rotY - rotX + rx) / largestSpeed;
+            double frontLeftPower = (rotY + rotX + rx) / largestSpeed;
             double backLeftPower = (rotY - rotX + rx) / largestSpeed;
-            double frontRightPower = (rotY - rotX + rx) / largestSpeed;
-            double backRightPower = (rotY - rotX + rx) / largestSpeed;
+            double frontRightPower = (rotY - rotX - rx) / largestSpeed;
+            double backRightPower = (rotY + rotX - rx) / largestSpeed;
 
             m_frontLeft.set(frontLeftPower);
             m_frontRight.set(frontRightPower);
