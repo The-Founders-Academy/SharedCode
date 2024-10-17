@@ -30,6 +30,7 @@ public class Mecanum2025 extends BaseMecanumDrive {
     double perpendicularOffsetCentimeters = -20.32;
     private double m_initialAngleRad;
     private Pose2d m_robotPose;
+    private Pose2d m_targetPose = new Pose2d(0, 0, Rotation2d.fromDegrees(0));
     private IMU m_gyro;
 
     private HolonomicOdometry m_odo;
@@ -88,6 +89,33 @@ public class Mecanum2025 extends BaseMecanumDrive {
     @Override
     public void resetPose(Pose2d pose) {
 
+    }
+
+    public void setTargetPose(Pose2d targetPose) {
+        m_targetPose = targetPose;
+        m_translationXController.setSetPoint(m_targetPose.getX());
+        m_translationYController.setSetPoint(m_targetPose.getY());
+
+        double targetRotation = 0;
+        if(m_targetPose.getHeading() < 0) {
+            targetRotation = m_targetPose.getHeading() + 2 * Math.PI;
+        } else {
+            targetRotation = m_targetPose.getHeading();
+        }
+
+
+        m_rotationController.setSetPoint(targetRotation);
+    }
+
+    public boolean atTargetPose() {
+        return (m_translationXController.atSetPoint() && m_translationYController.atSetPoint() && m_rotationController.atSetPoint());
+    }
+
+    public void stop() {
+        m_frontLeft.stopMotor();
+        m_frontRight.stopMotor();
+        m_backLeft.stopMotor();
+        m_backRight.stopMotor();
     }
 
     @Override

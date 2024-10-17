@@ -10,8 +10,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
 @TeleOp
 public class ArmMotorTestNoCRV extends LinearOpMode {
-    public DcMotor armMotor = null; //the arm motor
-    public Servo wrist = null; //the wrist servo
+        public DcMotor armMotor = null; //the arm motor
+        public Servo wrist = null; //the wrist servo
 
     final double ARM_TICKS_PER_DEGREE =
             28 // number of encoder ticks per rotation of the bare motor
