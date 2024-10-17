@@ -36,6 +36,5 @@ DriveAndArm2025 extends CommandOpMode {
         DcMotor armMotor = hardwareMap.get(DcMotor.class, "arm");
 //        CRServo intake = hardwareMap.get(CRServo.class, "intake");
         Servo wrist = hardwareMap.get(Servo.class, "wrist");
-        armSubsystem = new Arm2025(armMotor, wrist);
     }
 }
