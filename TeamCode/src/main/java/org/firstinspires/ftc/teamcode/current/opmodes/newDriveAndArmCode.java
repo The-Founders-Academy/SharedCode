@@ -119,6 +119,11 @@ public class newDriveAndArmCode extends LinearOpMode {
             double rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
             double rotY = x * Math.sin(-botHeading) + y * Math.cos(-botHeading);
 
+            telemetry.addData("BotHeading: ", botHeading);
+            telemetry.addData("Rotation X", rotX);
+            telemetry.addData("Rotation Y", rotY);
+            telemetry.update();
+
             rotX = rotX * 1.1; // counteracts imperfect strafing
 
             // Normalizes all wheel powers to be within the range -1 to 1 by dividing by the largest wheel speed
