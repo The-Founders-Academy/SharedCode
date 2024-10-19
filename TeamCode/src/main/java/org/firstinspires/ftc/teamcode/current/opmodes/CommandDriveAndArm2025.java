@@ -23,30 +23,11 @@ import org.firstinspires.ftc.teamcode.shared.mecanum.BaseMecanumDrive;
 import org.firstinspires.ftc.teamcode.shared.mecanum.MecanumConfigs;
 import org.firstinspires.ftc.teamcode.shared.util.CommandGamepad;
 
-import java.util.Collections;
-import java.util.Set;
+public class CommandDriveAndArm2025 extends CommandOpMode {
 
-@TeleOp()
-public class
-
-DriveAndArm2025 extends CommandOpMode {
     private Mecanum2025 m_mecanumDrive;
     private CommandGamepad m_driver;
     private Arm2025 armSubsystem;
-
-    @Override
-    public void runOpMode() throws InterruptedException {
-        initialize();
-
-        waitForStart();
-
-        // run the scheduler
-        while (!isStopRequested() && opModeIsActive()) {
-            CommandScheduler.getInstance().run();
-        }
-        reset();
-    }
-
     @Override
     public void initialize() {
         MecanumConfigs configs = new MecanumConfigs().runMode(MotorEx.RunMode.RawPower);
@@ -58,19 +39,15 @@ DriveAndArm2025 extends CommandOpMode {
         m_mecanumDrive.setDefaultCommand(new DriverRelativeDrive(m_mecanumDrive, m_driver));
 
 
-        m_driver.buttonA().whenPressed(new InstantCommand(() -> armSubsystem.setWristPosition(0.5)));
-        m_driver.buttonB().whenPressed(new InstantCommand(() -> armSubsystem.setWristPosition(0.8333)));
+        // Arm Commands
+        m_driver.buttonA().whenPressed(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.ARM_COLLECT));
+        m_driver.buttonB().whenPressed(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.ARM_CLEAR_BARRIER));
+        m_driver.buttonX().whenPressed(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.ARM_SCORE_SAMPLE_IN_LOW));
 
-
-        m_driver.dpadUp().whenPressed(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.ARM_ATTACH_HANGING_HOOK));
+        m_driver.dpadLeft().whenPressed(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.ARM_SCORE_SPECIMEN));
+        m_driver.dpadUp().whenPressed(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.ARM_SCORE_SPECIMEN));
+        m_driver.dpadRight().whenPressed(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.ARM_WINCH_ROBOT));
         m_driver.dpadDown().whenPressed(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.ARM_COLLAPSED_INTO_ROBOT));
 
-
     }
-
-    public void reset() {
-        // Cleanup or reset code here, if necessary
-    }
-
-
 }

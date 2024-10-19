@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.current.commands;
 
 import com.arcrobotics.ftclib.command.CommandBase;
+import com.arcrobotics.ftclib.command.InstantCommand;
 
 import org.firstinspires.ftc.teamcode.current.subsytems.Arm2025;
 
@@ -19,6 +20,7 @@ public class WristCommand extends CommandBase {
         m_wristPosition = wristPosition;
         m_arm = armSubsystem;
 
+        addRequirements(m_arm);
     }
 
     @Override
@@ -26,8 +28,10 @@ public class WristCommand extends CommandBase {
         switch (m_wristPosition) {
             case FOLDED_IN:
                 m_arm.setWristPosition(m_arm.getWRIST_FOLDED_IN());
+                break;
             case FOLDED_OUT:
                 m_arm.setWristPosition(m_arm.getWRIST_FOLDED_OUT());
+                break;
         }
     }
 
