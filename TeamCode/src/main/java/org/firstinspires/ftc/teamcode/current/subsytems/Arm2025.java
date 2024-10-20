@@ -13,6 +13,7 @@ public class Arm2025 extends SubsystemBase {
 
     private final Servo wrist;
     private final DcMotor armMotor;
+    private final CRServo intake;
 
     final double ARM_TICKS_PER_DEGREE =
             28 // number of encoder ticks per rotation of the bare motor
@@ -49,6 +50,7 @@ public class Arm2025 extends SubsystemBase {
 
         wrist = hardwareMap.get(Servo.class, "wrist");
         armMotor = hardwareMap.get(DcMotor.class, "arm");
+        intake = hardwareMap.get(CRServo.class, "intake");
 
     }
 
@@ -92,6 +94,10 @@ public class Arm2025 extends SubsystemBase {
         return WRIST_FOLDED_OUT;
     }
 
+    public double getINTAKE_COLLECT() { return INTAKE_COLLECT; }
+    public double getINTAKE_OFF() { return INTAKE_OFF; }
+    public double getINTAKE_DEPOSIT() { return INTAKE_DEPOSIT; }
+
     public void setArmPosition(double armPosition) {
         armMotor.setTargetPosition((int) (armPosition));
 
@@ -107,6 +113,11 @@ public class Arm2025 extends SubsystemBase {
 
     public void setWristPosition(double wristPosition) {
         wrist.setPosition(wristPosition);
+    }
+
+    public void setIntake(double intakeSpeed) {
+        // Same as motor, speed is between -1 and 1
+        intake.set(intakeSpeed);
     }
 
 }

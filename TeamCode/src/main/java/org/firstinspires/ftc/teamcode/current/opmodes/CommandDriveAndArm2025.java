@@ -17,6 +17,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.current.commands.ArmCommand;
 import org.firstinspires.ftc.teamcode.current.commands.DriverRelativeDrive;
+import org.firstinspires.ftc.teamcode.current.commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.current.commands.WristCommand;
 import org.firstinspires.ftc.teamcode.current.subsytems.Arm2025;
 import org.firstinspires.ftc.teamcode.current.subsytems.Mecanum2025;
@@ -50,10 +51,14 @@ public class CommandDriveAndArm2025 extends CommandOpMode {
         m_driver.dpadRight().whenPressed(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.ARM_WINCH_ROBOT));
         m_driver.dpadDown().whenPressed(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.ARM_COLLAPSED_INTO_ROBOT));
 
+        m_driver.leftBumper().whenPressed(new IntakeCommand(armSubsystem, IntakeCommand.IntakeSetting.INTAKE_COLLECT));
+        m_driver.rightBumper().whenPressed(new IntakeCommand(armSubsystem, IntakeCommand.IntakeSetting.INTAKE_DEPSOSIT));
+        m_driver.buttonY().whenPressed(new IntakeCommand(armSubsystem, IntakeCommand.IntakeSetting.INTAKE_OFF));
 
 //        new Trigger(() -> m_driver.leftTrigger() > 0.25).whenActive(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.LEFT_TRIGGER_PRESSED));
 //        new Trigger(() -> m_driver.rightTrigger() > 0.25).whenActive(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.RIGHT_TRIGGER_PRESSED));
 
+        // buttons created in CommandGamepad class
         m_driver.getLeftTriggerActive().whenActive(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.LEFT_TRIGGER_PRESSED));
         m_driver.getrightTriggerActive().whenActive(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.RIGHT_TRIGGER_PRESSED));
 

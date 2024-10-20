@@ -56,6 +56,14 @@ public class CommandGamepad extends SubsystemBase {
         return m_gamepad.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT);
     }
 
+    public GamepadButton leftBumper() {
+        return m_gamepad.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER);
+    }
+
+    public GamepadButton rightBumper() {
+        return m_gamepad.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER);
+    }
+
     public Trigger m_leftTriggerActive = new Trigger(() -> leftTrigger() > epsilon);
     public Trigger m_rightTriggerActive = new Trigger(() -> rightTrigger() > epsilon);
 

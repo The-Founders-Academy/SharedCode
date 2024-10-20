@@ -13,24 +13,24 @@ public class WristCommand extends CommandBase {
         FOLDED_OUT
     }
 
-    private Arm2025 m_arm;
+    private Arm2025 m_armSubsystem;
     private WristPosition m_wristPosition;
 
     public WristCommand(Arm2025 armSubsystem, WristPosition wristPosition) {
         m_wristPosition = wristPosition;
-        m_arm = armSubsystem;
+        m_armSubsystem = armSubsystem;
 
-        addRequirements(m_arm);
+        addRequirements(m_armSubsystem);
     }
 
     @Override
     public void initialize() {
         switch (m_wristPosition) {
             case FOLDED_IN:
-                m_arm.setWristPosition(m_arm.getWRIST_FOLDED_IN());
+                m_armSubsystem.setWristPosition(m_armSubsystem.getWRIST_FOLDED_IN());
                 break;
             case FOLDED_OUT:
-                m_arm.setWristPosition(m_arm.getWRIST_FOLDED_OUT());
+                m_armSubsystem.setWristPosition(m_armSubsystem.getWRIST_FOLDED_OUT());
                 break;
         }
     }
