@@ -57,9 +57,7 @@ public class MecanumConfigs {
         return m_frontLeftName;
     }
 
-    public String getFrontRightName() {
-        return m_frontRightName;
-    }
+    public String getFrontRightName() { return m_frontRightName; }
 
     public String getBackLeftName() {
         return m_backLeftName;

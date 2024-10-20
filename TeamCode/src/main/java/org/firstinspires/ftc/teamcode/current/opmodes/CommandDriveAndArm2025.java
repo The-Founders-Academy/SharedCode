@@ -51,8 +51,11 @@ public class CommandDriveAndArm2025 extends CommandOpMode {
         m_driver.dpadDown().whenPressed(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.ARM_COLLAPSED_INTO_ROBOT));
 
 
-        new Trigger(() -> m_driver.leftTrigger() > 0.25).whenActive(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.LEFT_TRIGGER_PRESSED));
-        new Trigger(() -> m_driver.rightTrigger() > 0.25).whenActive(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.RIGHT_TRIGGER_PRESSED));
+//        new Trigger(() -> m_driver.leftTrigger() > 0.25).whenActive(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.LEFT_TRIGGER_PRESSED));
+//        new Trigger(() -> m_driver.rightTrigger() > 0.25).whenActive(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.RIGHT_TRIGGER_PRESSED));
+
+        m_driver.getLeftTriggerActive().whenActive(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.LEFT_TRIGGER_PRESSED));
+        m_driver.getrightTriggerActive().whenActive(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.RIGHT_TRIGGER_PRESSED));
 
     }
 }
