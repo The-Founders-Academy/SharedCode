@@ -6,6 +6,8 @@ import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.robotcore.internal.hardware.android.GpioPin;
+
 public class CommandGamepad extends SubsystemBase {
     private GamepadEx m_gamepad;
     private SlewRateLimiter m_slewRateLimiterLeftX;
@@ -36,6 +38,10 @@ public class CommandGamepad extends SubsystemBase {
     public GamepadButton buttonB() {
         return m_gamepad.getGamepadButton(GamepadKeys.Button.B);
     }
+
+    public GamepadButton leftBumper() { return m_gamepad.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER); }
+
+    public GamepadButton rightBumper() { return m_gamepad.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER); }
 
     public GamepadButton dpadDown() {
         return m_gamepad.getGamepadButton(GamepadKeys.Button.DPAD_DOWN);
@@ -93,9 +99,7 @@ public class CommandGamepad extends SubsystemBase {
         return Math.sqrt(Math.pow(getLeftX(), 2) + Math.pow(getLeftY(), 2));
     }
 
-    public double leftTrigger() {
-        return m_gamepad.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER);
-    }
+    public double leftTrigger() { return m_gamepad.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER); }
 
     public double rightTrigger() {
         return m_gamepad.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER);

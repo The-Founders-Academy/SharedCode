@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.current.subsytems;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
+import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.arcrobotics.ftclib.hardware.motors.CRServo;
@@ -96,6 +97,12 @@ public class Arm2025 extends SubsystemBase {
 
         ((DcMotorEx) armMotor).setVelocity(2100);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+    }
+
+    public void setArmPower(double power) {
+        armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        armMotor.setPower(power);
     }
 
     public void setWristPosition(double wristPosition) {
