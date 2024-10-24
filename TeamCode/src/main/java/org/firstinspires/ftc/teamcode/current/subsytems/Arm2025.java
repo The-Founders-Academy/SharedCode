@@ -1,10 +1,10 @@
 package org.firstinspires.ftc.teamcode.current.subsytems;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.arcrobotics.ftclib.hardware.motors.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -22,9 +22,9 @@ public class Arm2025 extends SubsystemBase {
                     * 1 / 360.0; // we want ticks per degree, not per rotation
 
     final double ARM_COLLAPSED_INTO_ROBOT = 0;
-    final double ARM_COLLECT = 250 * ARM_TICKS_PER_DEGREE;
-    final double ARM_CLEAR_BARRIER = 230 * ARM_TICKS_PER_DEGREE;
-    final double ARM_SCORE_SPECIMEN = 147 * ARM_TICKS_PER_DEGREE;       // was 148
+    final double ARM_COLLECT = 239.5 * ARM_TICKS_PER_DEGREE;
+    final double ARM_CLEAR_BARRIER = 220 * ARM_TICKS_PER_DEGREE;    // was 230
+    final double ARM_SCORE_SPECIMEN = 151.5 * ARM_TICKS_PER_DEGREE;       // was 148
     final double ARM_SCORE_SAMPLE_IN_LOW = 140 * ARM_TICKS_PER_DEGREE;
     final double ARM_ATTACH_HANGING_HOOK = 120 * ARM_TICKS_PER_DEGREE;
     final double ARM_WINCH_ROBOT = 15 * ARM_TICKS_PER_DEGREE;
@@ -51,7 +51,6 @@ public class Arm2025 extends SubsystemBase {
         wrist = hardwareMap.get(Servo.class, "wrist");
         armMotor = hardwareMap.get(DcMotor.class, "arm");
         intake = hardwareMap.get(CRServo.class, "intake");
-
     }
 
     public double getARM_TICKS_PER_DEGREE() {
@@ -117,7 +116,7 @@ public class Arm2025 extends SubsystemBase {
 
     public void setIntake(double intakeSpeed) {
         // Same as motor, speed is between -1 and 1
-        intake.set(intakeSpeed);
+        intake.setPower(intakeSpeed);
     }
 
 }

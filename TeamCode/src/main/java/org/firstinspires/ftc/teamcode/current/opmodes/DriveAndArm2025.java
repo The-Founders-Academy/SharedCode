@@ -5,6 +5,7 @@ import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.CommandScheduler;
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.Subsystem;
+import com.arcrobotics.ftclib.command.button.Button;
 import com.arcrobotics.ftclib.geometry.Pose2d;
 import com.arcrobotics.ftclib.geometry.Rotation2d;
 import com.arcrobotics.ftclib.hardware.motors.CRServo;
@@ -40,6 +41,7 @@ DriveAndArm2025 extends CommandOpMode {
 
         waitForStart();
 
+
         // run the scheduler
         while (!isStopRequested() && opModeIsActive()) {
             CommandScheduler.getInstance().run();
@@ -49,6 +51,7 @@ DriveAndArm2025 extends CommandOpMode {
 
     @Override
     public void initialize() {
+
         MecanumConfigs configs = new MecanumConfigs().runMode(MotorEx.RunMode.RawPower);
 
         m_mecanumDrive = new Mecanum2025(hardwareMap, configs, new Pose2d(0, 0, Rotation2d.fromDegrees(90)), BaseMecanumDrive.Alliance.RED);
@@ -58,19 +61,37 @@ DriveAndArm2025 extends CommandOpMode {
         m_mecanumDrive.setDefaultCommand(new DriverRelativeDrive(m_mecanumDrive, m_driver));
 
 
-        m_driver.buttonA().whenPressed(new InstantCommand(() -> armSubsystem.setWristPosition(0.5)));
-        m_driver.buttonB().whenPressed(new InstantCommand(() -> armSubsystem.setWristPosition(0.8333)));
 
 
-        m_driver.dpadUp().whenPressed(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.ARM_ATTACH_HANGING_HOOK));
-        m_driver.dpadDown().whenPressed(new ArmCommand(armSubsystem, ArmCommand.ArmPosition.ARM_COLLAPSED_INTO_ROBOT));
+
+
+
+
+
+          m_driver.buttonA().whenPressed(new InstantCommand(() -> armSubsystem.setWristPosition(armSubsystem.getWRIST_FOLDED_OUT())));
+          m_driver.buttonA().whenPressed(new InstantCommand(() -> armSubsystem.setArmPosition(armSubsystem.getARM_COLLECT())));
+          //m_driver.buttonA().whenPressed(new InstantCommand(() -> armSubsystem.setWristPosition(0.5)));
+
+          m_driver.buttonB().whenPressed(new InstantCommand(() -> armSubsystem.setArmPosition(armSubsystem.getARM_CLEAR_BARRIER())));
+          //m_driver.buttonB().whenPressed(new InstantCommand(() -> armSubsystem.setWristPosition(0.8333)));
+
+          m_driver.buttonX().whenPressed(new InstantCommand(() -> armSubsystem.setArmPosition(armSubsystem.getARM_SCORE_SAMPLE_IN_LOW())));
+          m_driver.buttonX().whenPressed(new InstantCommand(() -> armSubsystem.setWristPosition(armSubsystem.getWRIST_FOLDED_OUT())));
+
+          m_driver.dpadDown().whenPressed(new InstantCommand(() -> armSubsystem.setArmPosition(armSubsystem.getARM_COLLAPSED_INTO_ROBOT())));
+          m_driver.dpadDown().whenPressed(new InstantCommand(() -> armSubsystem.setWristPosition(armSubsystem.getWRIST_FOLDED_IN())));
+
+
+          m_driver.dpadUp().whenPressed(new InstantCommand(() -> armSubsystem.setArmPosition(armSubsystem.getARM_ATTACH_HANGING_HOOK())));
+
+          m_driver.dpadRight().whenPressed(new InstantCommand(() -> armSubsystem.setArmPosition(armSubsystem.getARM_SCORE_SPECIMEN())));
+          m_driver.dpadRight().whenPressed(new InstantCommand(() -> armSubsystem.setWristPosition(armSubsystem.getWRIST_FOLDED_IN())));
 
 
     }
 
     public void reset() {
-        // Cleanup or reset code here, if necessary
+        // Any code necessary to reset robot
+
     }
-
-
 }
