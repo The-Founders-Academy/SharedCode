@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode.current.commands;
 
 import com.arcrobotics.ftclib.command.CommandBase;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.current.subsytems.Arm2025;
+
 
 public class ArmCommand extends CommandBase {
     public enum ArmPosition {
@@ -24,7 +26,7 @@ public class ArmCommand extends CommandBase {
 
     public ArmCommand(Arm2025 armSubsystem, ArmPosition armPosition) {
         m_armPosition = armPosition;
-        m_armSubsystem = m_armSubsystem;
+        m_armSubsystem = armSubsystem;
 
         addRequirements(m_armSubsystem);
         // TODO See if the line above is actually needed

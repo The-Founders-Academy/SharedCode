@@ -25,6 +25,7 @@ import org.firstinspires.ftc.teamcode.shared.mecanum.BaseMecanumDrive;
 import org.firstinspires.ftc.teamcode.shared.mecanum.MecanumConfigs;
 import org.firstinspires.ftc.teamcode.shared.util.CommandGamepad;
 
+@TeleOp()
 public class CommandDriveAndArm2025 extends CommandOpMode {
 
     private Mecanum2025 m_mecanumDrive;

@@ -14,7 +14,7 @@ public class ServoTest extends LinearOpMode {
     public void runOpMode(){
 
         wrist = hardwareMap.get(Servo.class, "wrist");
-
+        intake = hardwareMap.get(CRServo.class, "intake"); 
         waitForStart();
 
         while(opModeIsActive()) {

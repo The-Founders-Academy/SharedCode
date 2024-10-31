@@ -60,6 +60,8 @@ public class newDrive2025 extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+
+
         /*
         These variables are private to the OpMode, and are used to control the drivetrain.
          */
@@ -74,6 +76,8 @@ public class newDrive2025 extends LinearOpMode {
         m_frontRight = new MotorEx(hardwareMap, "fR", Motor.GoBILDA.RPM_312);
         m_backLeft = new MotorEx(hardwareMap, "bL", Motor.GoBILDA.RPM_312);
         m_backRight = new MotorEx(hardwareMap, "bR", Motor.GoBILDA.RPM_312);
+
+
 
         m_frontLeft.setRunMode(Motor.RunMode.RawPower);
         m_frontRight.setRunMode(Motor.RunMode.RawPower);
