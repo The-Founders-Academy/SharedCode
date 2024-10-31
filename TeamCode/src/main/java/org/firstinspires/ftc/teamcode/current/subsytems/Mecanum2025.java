@@ -43,7 +43,7 @@ public class Mecanum2025 extends BaseMecanumDrive {
         m_backLeft.setInverted(true);
 
         m_robotPose = initialPose;
-        m_initialAngleRad = initialPose.getHeading();
+        m_initialAngleRad = m_robotPose.getRotation().getRadians();
 
         double cm_per_tick = 2 * Math.PI * deadWheelRadiusCentimeters / ticksPerRevolution;
         Encoder left = m_frontRight.encoder.setDistancePerPulse(cm_per_tick);
@@ -89,6 +89,10 @@ public class Mecanum2025 extends BaseMecanumDrive {
     @Override
     public void resetPose(Pose2d pose) {
 
+    }
+
+    public double resetHeading() {
+        return m_robotPose.getHeading() - m_initialAngleRad;
     }
 
     public void setTargetPose(Pose2d targetPose) {

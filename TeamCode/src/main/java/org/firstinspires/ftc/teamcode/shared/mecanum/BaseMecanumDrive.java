@@ -81,7 +81,8 @@ public abstract class BaseMecanumDrive extends SubsystemBase {
         ChassisSpeeds speeds;
         if(m_alliance == Alliance.BLUE) {
             speeds = ChassisSpeeds.fromFieldRelativeSpeeds(vXMps, vYMps, omegaRps, getHeading().minus(Rotation2d.fromDegrees(180)));
-        } else {
+        }
+        else {
             speeds = ChassisSpeeds.fromFieldRelativeSpeeds(vXMps, vYMps, omegaRps, getHeading());
 
             TelemetryPacket heading = new TelemetryPacket();
