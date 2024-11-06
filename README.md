@@ -50,7 +50,7 @@ You will then be able to change the value of "number" live on FTCDashboard and s
 
 
 
-// KINEMATIC EQUATIONS //
+<h2>KINEMATIC EQUATIONS</h2>
 
 Equation for Heading: (Heading is simply where the robot is facing, always starts at zero)
 
@@ -71,7 +71,7 @@ https://www.youtube.com/watch?v=ixsxDn_ddLE&t=150s
 
 
 
-// TELEMETRY PACKETS //
+<h2>TELEMETRY PACKETS</h2>
 
 Telemetry Packets are very important in the debugging process (something that you will probably run into quite a bit). Telemtry packets have an advantage over the traditional:
 telemetry.addData("Sample Data", x);
