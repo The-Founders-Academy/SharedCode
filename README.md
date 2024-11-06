@@ -63,7 +63,6 @@ L = Distance that Left Odometry Pod has moved
 For a visual representation of this and more similar concepts, see:
 https://www.youtube.com/watch?v=ixsxDn_ddLE&t=150s
 
-//////////////////////////////////
 
 
 
